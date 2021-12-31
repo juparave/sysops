@@ -15,14 +15,17 @@ if [ ! -f "STEP_01" ]; then
     echo "${BLUE}Updating instance${ENDCOLR}"
     apt-get update
     aptitude -y safe-upgrade
-    apt-get install -y aptitude vim fzf
+    apt-get install -y aptitude vim fzf net-tools
 
-    echo "${GREEN}please enter desired hostname${ENDCOLR}"
-    read hn
-    echo "setting hostname to: ${hn}"
-    hostname ${hn}
-    hostname -s > /etc/hostname
-    sed -i "/127.0.0.1/ s/.*/127.0.0.1\t$(hostname) localhost $(hostname -s)/g" /etc/hosts
+    while true; do
+        echo "${GREEN}please enter desired hostname${ENDCOLR}"
+        read hn
+        echo "setting hostname to: ${hn}"
+        hostname ${hn}
+        hostname -s > /etc/hostname
+        sed -i "/127.0.0.1/ s/.*/127.0.0.1\t$(hostname) localhost $(hostname -s)/g" /etc/hosts
+        break
+    done
     
     echo "${GREEN}regenerate self-signed ssl${ENDCOLR}"
     apt-get install -y ssl-cert
@@ -41,7 +44,7 @@ if [ ! -f "STEP_01" ]; then
     exit 0
 fi
 
-if [ ! -f "STEP_02" ]; then
+if [ -f "STEP_02" ]; then
     echo "${RED}Seems like all steps are already done${ENDCOLR}"
     exit 0
 fi
@@ -76,14 +79,24 @@ install_webserver() {
 
 install_mysql() {
     echo "${BLUE}installing mysql database server"
-    apt-get install -y mysql
+    apt-get install -y mysql-server
 }
 
-WEBSERVER=$(echo "apache2 nginx" | tr " " "\n" | fzf)
+install_postfix() {
+    echo "${BLUE}installing postfix server${ENDCOLR}"
+    apt-get install -y postfix
+    read -p "Enter root email alias" ROOTALIAS
+    sed -i "/root:/ s/.*/root:\t\t${ROOTALIAS}/g" /etc/aliases
+    echo "${GREEN}default email aliases${ENDCOLR}"
+    cat /etc/aliases
+}
+
 install_languages
 install_mysql
+WEBSERVER=$(echo "apache2 nginx" | tr " " "\n" | fzf)
 install_webserver
+install_postfix
 
 echo "${GREEN}All installations are done!${ENDCOLR}"
-echo "${RED} a reboot is recomended${ENDCOLR}"
+echo "${RED}reboot is recomended${ENDCOLR}"
 touch STEP_02
