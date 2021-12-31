@@ -82,7 +82,7 @@ install_mysql() {
 WEBSERVER=$(echo "apache2 nginx" | tr " " "\n" | fzf)
 install_languages
 install_mysql
-
+install_webserver
 
 echo "${GREEN}All installations are done!${ENDCOLR}"
 echo "${RED} a reboot is recomended${ENDCOLR}"
