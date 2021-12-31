@@ -16,10 +16,18 @@ if [ -f "STEP_01"]; then
     apt-get install aptitude
     aptitude -y safe-upgrade
 
-    echo "${GREEN} please enter desired hostname${ENDCOLR}"
+    echo "${GREEN}please enter desired hostname${ENDCOLR}"
     read hm
     echo "setting hostname to: ${hm}"
     hostname ${hm}
+    
+    echo "${GREEN}regenerate self-signed ssl"
+    apt-get install -y ssl-cert
+    make-ssl-cert generate-default-snakeoil —force-overwrite
+
+    echo "${GREEN}Timezone and locale"
+    dpkg-reconfigure tzdata
+    /usr/sbin/locale-gen es_MX.UTF-8
     touch STEP_01
 fi
 
