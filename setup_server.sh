@@ -86,9 +86,9 @@ install_postfix() {
     echo "${BLUE}installing postfix server${ENDCOLR}"
     apt-get install -y postfix
     while true; do
-        read -p "${GREEN}Enter root email alias${ENDCOLR}" ROOTALIAS
+        read -p "${GREEN}Enter root email alias${ENDCOLR} " ROOTALIAS
         #sed -i "/root:/ s/.*/root:\t\t${ROOTALIAS}/g" /etc/aliases
-        echo "root:\t\t${ROOTALIAS}" >> /etc/aliases
+        echo -e "root:\t\t${ROOTALIAS}" >> /etc/aliases
         echo "${GREEN}default email aliases${ENDCOLR}"
         cat /etc/aliases
     done
