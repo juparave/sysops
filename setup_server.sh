@@ -41,8 +41,8 @@ if [ ! -f "STEP_01" ]; then
     exit 0
 fi
 
-if [ ! -f "STEP_01" ]; then
-    echo "${RED}Seems like all steps are alreadoy done${ENDCOLR}"
+if [ ! -f "STEP_02" ]; then
+    echo "${RED}Seems like all steps are already done${ENDCOLR}"
     exit 0
 fi
 
