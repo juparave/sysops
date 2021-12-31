@@ -14,7 +14,7 @@ ENDCOLR=$(tput setaf 7)
 if [ ! -f "STEP_01" ]; then
     echo "${BLUE}Updating instance${ENDCOLR}"
     apt-get update
-    aptitude -y safe-upgrade
+    apt-get -y safe-upgrade
     apt-get install -y aptitude vim fzf net-tools
 
     while true; do
@@ -51,7 +51,7 @@ fi
 
 install_languages() {
     echo "${BLUE}installing programming languages python and go${ENDCOLR}"
-    apt-get install -y python python-dev python-pip
+    apt-get install -y python python-dev python3-pip
     apt-get install -y golang
 }
 
@@ -78,17 +78,20 @@ install_webserver() {
 }
 
 install_mysql() {
-    echo "${BLUE}installing mysql database server"
+    echo "${BLUE}installing mysql database server${ENDCOLR}"
     apt-get install -y mysql-server
 }
 
 install_postfix() {
     echo "${BLUE}installing postfix server${ENDCOLR}"
     apt-get install -y postfix
-    read -p "Enter root email alias" ROOTALIAS
-    sed -i "/root:/ s/.*/root:\t\t${ROOTALIAS}/g" /etc/aliases
-    echo "${GREEN}default email aliases${ENDCOLR}"
-    cat /etc/aliases
+    while true; do
+        read -p "${GREEN}Enter root email alias${ENDCOLR}" ROOTALIAS
+        #sed -i "/root:/ s/.*/root:\t\t${ROOTALIAS}/g" /etc/aliases
+        echo "root:\t\t${ROOTALIAS}" >> /etc/aliases
+        echo "${GREEN}default email aliases${ENDCOLR}"
+        cat /etc/aliases
+    done
 }
 
 install_languages
