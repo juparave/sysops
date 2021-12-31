@@ -2,7 +2,7 @@
 RED="\e[31m"
 GREEN="\e[32m"
 BLUEBG=$(tput setaf 123)
-ENDCOLR=$(tput setaf 0)
+ENDCOLR=$(tput setaf 7)
 ENDCOLOR="\e[0m"
 
 # Install a new server with common apps
