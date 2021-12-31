@@ -1,9 +1,8 @@
 #!/bin/bash
-RED="\e[31m"
-GREEN="\e[32m"
-BLUEBG=$(tput setaf 123)
+RED=$(tput setaf 160)
+GREEN=$(tput setaf 076)
+BLUE=$(tput setaf 123)
 ENDCOLR=$(tput setaf 7)
-ENDCOLOR="\e[0m"
 
 # Install a new server with common apps
 # Assuming this is an Ubuntu distro
