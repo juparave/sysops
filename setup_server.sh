@@ -82,6 +82,15 @@ install_mysql() {
     apt-get install -y mysql-server
 }
 
+install_mysql57() {
+    # ref: https://computingforgeeks.com/how-to-install-mysql-on-ubuntu-focal/
+    echo "${BLUE}installing mysql 5.7 database server${ENDCOLR}"
+    wget https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb
+    sudo dpkg -i mysql-apt-config_0.8.13-1_all.deb
+    apt-get update
+    apt install -f mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
+}
+
 install_postfix() {
     echo "${BLUE}installing postfix server${ENDCOLR}"
     apt-get install -y postfix
@@ -91,11 +100,12 @@ install_postfix() {
         echo -e "root:\t\t${ROOTALIAS}" >> /etc/aliases
         echo "${GREEN}default email aliases${ENDCOLR}"
         cat /etc/aliases
+        break
     done
 }
 
 install_languages
-install_mysql
+install_mysql57
 WEBSERVER=$(echo "apache2 nginx" | tr " " "\n" | fzf)
 install_webserver
 install_postfix
