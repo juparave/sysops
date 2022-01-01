@@ -84,7 +84,7 @@ install_mysql() {
 
 install_php() {
     echo "${BLUE}install php support${ENDCOLR}"
-    apt install -y php-fpm php-mysql php-xml
+    apt install -y php-fpm php-mysql php-xml php-mbstring
 
 }
 
@@ -96,11 +96,15 @@ install_phpmyadmin() {
     mv phpMyAdmin-5.1.1-english phpmyadmin
 
     if [[ $WEBSERVER == "nginx" ]]; then
+        # uncommenting config file to enable php support
         sed -i "/#location.*php/ s/#//g" /etc/nginx/sites-enabled/default
         sed -i "/#.*include.*php.conf/ s/#//g" /etc/nginx/sites-enabled/default
         sed -i "/#.*fastcgi.*.sock/ s/#//g" /etc/nginx/sites-enabled/default
         # we still need to uncomment the closing bracket from this section `}`
         ## TODO
+        sed -i "62s/#}$/}/g" /etc/nginx/sites-enabled/default
+        sed -i "63s/#}$/}/g" /etc/nginx/sites-enabled/default
+        sed -i "64s/#}$/}/g" /etc/nginx/sites-enabled/default
     else
         if [[ $WEBSERVER == "apache" ]]; then
             die "not implemented for apache2, check phpmyadmin installation for $WEBSERVER"
