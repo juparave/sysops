@@ -100,6 +100,7 @@ install_phpmyadmin() {
         sed -i "/#.*include.*php.conf/ s/#//g" /etc/nginx/sites-enabled/default
         sed -i "/#.*fastcgi.*.sock/ s/#//g" /etc/nginx/sites-enabled/default
         # we still need to uncomment the closing bracket from this section `}`
+        ## TODO
     else
         if [[ $WEBSERVER == "apache" ]]; then
             die "not implemented for apache2, check phpmyadmin installation for $WEBSERVER"
