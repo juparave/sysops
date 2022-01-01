@@ -79,7 +79,32 @@ install_webserver() {
 
 install_mysql() {
     echo "${BLUE}installing mysql database server${ENDCOLR}"
-    apt-get install -y mysql-server
+    apt install -y mysql-server
+}
+
+install_php() {
+    echo "${BLUE}install php support${ENDCOLR}"
+    apt install -y php-fpm php-mysql php-xml
+
+}
+
+install_phpmyadmin() {
+    install_php()
+    # download and extract phpmyadmin to /var/www/html/phpmyadmin
+    wget https://files.phpmyadmin.net/phpMyAdmin/5.1.1/phpMyAdmin-5.1.1-english.tar.gz
+    tar zxvf phpMyAdmin-5.1.1-english.tar.gz -C /var/www/html/
+    mv phpMyAdmin-5.1.1-english phpmyadmin
+
+    if [[ $WEBSERVER == "nginx" ]]; then
+        sed -i "/#location.*php/ s/#//g" /etc/nginx/sites-enabled/default
+        sed -i "/#.*include.*php.conf/ s/#//g" /etc/nginx/sites-enabled/default
+        sed -i "/#.*fastcgi.*.sock/ s/#//g" /etc/nginx/sites-enabled/default
+        # we still need to uncomment the closing bracket from this section `}`
+    else
+        if [[ $WEBSERVER == "apache" ]]; then
+            die "not implemented for apache2, check phpmyadmin installation for $WEBSERVER"
+        fi
+    fi
 }
 
 install_mysql57() {
