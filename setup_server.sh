@@ -88,7 +88,7 @@ install_php() {
 
 }
 
-install_certbot {
+install_certbot() {
     if [[ $WEBSERVER == "nginx" ]]; then
         # installing certbot for nginx
         apt install -y apt install python3-certbot python3-certbot-nginx
