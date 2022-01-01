@@ -19,9 +19,9 @@ if [ ! -f "STEP_01" ]; then
 
     while true; do
         echo "${GREEN}please enter desired hostname${ENDCOLR}"
-        read hn
-        echo "setting hostname to: ${hn}"
-        hostname ${hn}
+        read HOSTNAME
+        echo "setting hostname to: ${HOSTNAME}"
+        hostname ${HOSTNAME}
         hostname -s > /etc/hostname
         sed -i "/127.0.0.1/ s/.*/127.0.0.1\t$(hostname) localhost $(hostname -s)/g" /etc/hosts
         break
@@ -88,6 +88,18 @@ install_php() {
 
 }
 
+install_certbot {
+    if [[ $WEBSERVER == "nginx" ]]; then
+        # installing certbot for nginx
+        apt install -y apt install python3-certbot python3-certbot-nginx
+    else
+        if [[ $WEBSERVER == "apache" ]]; then
+            die "not implemented for apache2, check phpmyadmin installation for $WEBSERVER"
+        fi
+    fi
+}
+
+}
 install_phpmyadmin() {
     install_php()
     # download and extract phpmyadmin to /var/www/html/phpmyadmin
@@ -110,6 +122,9 @@ install_phpmyadmin() {
             die "not implemented for apache2, check phpmyadmin installation for $WEBSERVER"
         fi
     fi
+    # install ssl certificate for default server
+    install_certbot
+    certbot -d ${HOSTNAME}
 }
 
 install_mysql57() {
