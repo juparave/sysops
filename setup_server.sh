@@ -132,7 +132,7 @@ install_mysql57() {
     wget https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb
     sudo dpkg -i mysql-apt-config_0.8.13-1_all.deb
     apt-get update
-    apt install -f mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
+    apt install -y -f mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
 }
 
 install_postfix() {
