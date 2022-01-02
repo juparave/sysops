@@ -99,7 +99,6 @@ install_certbot() {
     fi
 }
 
-}
 install_phpmyadmin() {
     install_php()
     # download and extract phpmyadmin to /var/www/html/phpmyadmin
