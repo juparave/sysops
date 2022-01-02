@@ -100,7 +100,7 @@ install_certbot() {
 }
 
 install_phpmyadmin() {
-    install_php()
+    install_php
     # download and extract phpmyadmin to /var/www/html/phpmyadmin
     wget https://files.phpmyadmin.net/phpMyAdmin/5.1.1/phpMyAdmin-5.1.1-english.tar.gz
     tar zxvf phpMyAdmin-5.1.1-english.tar.gz -C /var/www/html/
