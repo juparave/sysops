@@ -14,8 +14,8 @@ ENDCOLR=$(tput setaf 7)
 if [ ! -f "STEP_01" ]; then
     echo "${BLUE}Updating instance${ENDCOLR}"
     apt-get update
-    apt-get -y safe-upgrade
     apt-get install -y aptitude vim fzf net-tools
+    aptitude -y safe-upgrade
 
     while true; do
         echo "${GREEN}please enter desired hostname${ENDCOLR}"
@@ -51,7 +51,7 @@ fi
 
 install_languages() {
     echo "${BLUE}installing programming languages python and go${ENDCOLR}"
-    apt-get install -y python python-dev python3-pip
+    apt-get install -y python python-dev python3-pip python3-venv
     apt-get install -y golang
 }
 
@@ -91,7 +91,7 @@ install_php() {
 install_certbot() {
     if [[ $WEBSERVER == "nginx" ]]; then
         # installing certbot for nginx
-        apt install -y apt install python3-certbot python3-certbot-nginx
+        apt install -y python3-certbot python3-certbot-nginx
     else
         if [[ $WEBSERVER == "apache" ]]; then
             die "not implemented for apache2, check phpmyadmin installation for $WEBSERVER"
@@ -104,7 +104,7 @@ install_phpmyadmin() {
     # download and extract phpmyadmin to /var/www/html/phpmyadmin
     wget https://files.phpmyadmin.net/phpMyAdmin/5.1.1/phpMyAdmin-5.1.1-english.tar.gz
     tar zxvf phpMyAdmin-5.1.1-english.tar.gz -C /var/www/html/
-    mv phpMyAdmin-5.1.1-english phpmyadmin
+    mv /var/www/html/phpMyAdmin-5.1.1-english /var/www/html/phpmyadmin
 
     if [[ $WEBSERVER == "nginx" ]]; then
         # uncommenting config file to enable php support
