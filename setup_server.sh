@@ -152,6 +152,7 @@ install_languages
 install_mysql57
 WEBSERVER=$(echo "apache2 nginx" | tr " " "\n" | fzf)
 install_webserver
+install_phpmyadmin
 install_postfix
 
 echo "${GREEN}All installations are done!${ENDCOLR}"
