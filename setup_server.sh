@@ -88,6 +88,13 @@ install_php() {
 
 }
 
+install_vimrc() {
+    echo "${BLUE}install vimrc and plug"
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    curl -s https://raw.githubusercontent.com/juparave/sysops/main/vimrc | cat > ~/.vimrc
+}
+
 install_certbot() {
     if [[ $WEBSERVER == "nginx" ]]; then
         # installing certbot for nginx
@@ -154,6 +161,7 @@ WEBSERVER=$(echo "apache2 nginx" | tr " " "\n" | fzf)
 install_webserver
 install_phpmyadmin
 install_postfix
+install_vimrc
 
 echo "${GREEN}All installations are done!${ENDCOLR}"
 echo "${RED}reboot is recomended${ENDCOLR}"
