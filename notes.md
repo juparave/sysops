@@ -2,7 +2,7 @@
 
 ### Basic tools
 
-    # apt install fzf net-tools ripgrep golang build-essential silversearcher-ag tmux
+    # apt install fzf net-tools ripgrep golang build-essential silversearcher-ag tmux zip unzip
 
 
 ### SSH
