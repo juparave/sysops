@@ -2,7 +2,7 @@
 
 ### Basic tools
 
-    # apt install fzf net-tools ripgrep golang
+    # apt install fzf net-tools ripgrep golang build-essential silversearcher-ag tmux
 
 
 ### SSH
