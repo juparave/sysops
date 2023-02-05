@@ -98,3 +98,6 @@ Install `docker-compose` plugin, for user
 
     # apt install nginx
 
+### nodejs
+
+Using nv  visit https://github.com/nvm-sh/nvm
