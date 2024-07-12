@@ -42,6 +42,10 @@ if [ ! -f "STEP_01" ]; then
     curl -s https://raw.githubusercontent.com/juparave/sysops/main/inputrc | cat > ~/.inputrc
     cp ~/.inputrc /etc/skel/
 
+    echo "${GREEN}installing vimrc${ENDCOLR}"
+    curl -s https://raw.githubusercontent.com/juparave/sysops/main/vimrc | cat > ~/.vimrc
+    cp ~/.inputrc /etc/skel/
+
     echo "${BLUE}Please reboot to finish step 01${ENDCOLR}"
     touch STEP_01
     exit 0
