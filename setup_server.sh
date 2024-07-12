@@ -112,7 +112,7 @@ install_certbot() {
 
 install_phpmyadmin() {
     # Confirm before installing phpMyAdmin
-    read -p -n1 "Do you want to install phpMyAdmin? (y/n): " yn </dev/tty
+    read -n1 -p "Do you want to install phpMyAdmin? (y/n): " yn </dev/tty
     case $yn in
         [Yy]* ) do_install_phpmyadmin; break;;
         [Nn]* ) echo "${RED}Skipping phpMyAdmin installation${ENDCOLR}"; break;;
@@ -160,7 +160,7 @@ install_postfix() {
     echo "${BLUE}installing postfix server${ENDCOLR}"
     apt-get install -y postfix
     while true; do
-        read -p "${GREEN}Enter root email alias${ENDCOLR} " ROOTALIAS
+        read -p "${GREEN}Enter root email alias${ENDCOLR} " ROOTALIAS </dev/tty
         #sed -i "/root:/ s/.*/root:\t\t${ROOTALIAS}/g" /etc/aliases
         echo -e "root:\t\t${ROOTALIAS}" >> /etc/aliases
         echo "${GREEN}default email aliases${ENDCOLR}"
