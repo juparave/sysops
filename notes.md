@@ -16,6 +16,14 @@ PermitEmptyPasswords no
 KbdInteractiveAuthentication yes
 ```
 
+Also some files inside `/etc/ssh/sshd_config.d` directory may have rules that invalidates the general configuration
+in this cases you can set an exception file with a lower number e.g. `10-password-login-for-special-user.conf`
+
+```
+Match User <username>
+    PasswordAuthentication yes
+```
+
 ### inputrc
 
 vim `/etc/skel/.inputrc`
