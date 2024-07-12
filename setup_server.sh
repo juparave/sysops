@@ -27,9 +27,12 @@ if [ ! -f "STEP_01" ]; then
         break
     done
     
+    echo "${GREEN}generate RSA ssh key${ENDCOLR}"
+    ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -P ""
+
     echo "${GREEN}regenerate self-signed ssl${ENDCOLR}"
     apt-get install -y ssl-cert
-    make-ssl-cert generate-default-snakeoil —force-overwrite
+    make-ssl-cert generate-default-snakeoil —-force-overwrite
 
     echo "${GREEN}Timezone and locale${ENDCOLR}"
     dpkg-reconfigure tzdata
