@@ -42,10 +42,6 @@ if [ ! -f "STEP_01" ]; then
     curl -s https://raw.githubusercontent.com/juparave/sysops/main/inputrc | cat > ~/.inputrc
     cp ~/.inputrc /etc/skel/
 
-    echo "${GREEN}installing vimrc${ENDCOLR}"
-    curl -s https://raw.githubusercontent.com/juparave/sysops/main/vimrc | cat > ~/.vimrc
-    cp ~/.inputrc /etc/skel/
-
     echo "${BLUE}Please reboot to finish step 01${ENDCOLR}"
     touch STEP_01
     exit 0
@@ -115,6 +111,18 @@ install_certbot() {
 }
 
 install_phpmyadmin() {
+    # Confirm before installing phpMyAdmin
+    while true; do
+        read -p "Do you want to install phpMyAdmin? (y/n): " yn
+        case $yn in
+            [Yy]* ) do_install_phpmyadmin; break;;
+            [Nn]* ) echo "${RED}Skipping phpMyAdmin installation${ENDCOLR}"; break;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+}
+
+do_install_phpmyadmin() {
     install_php
     # download and extract phpmyadmin to /var/www/html/phpmyadmin
     wget https://files.phpmyadmin.net/phpMyAdmin/5.1.1/phpMyAdmin-5.1.1-english.tar.gz
@@ -164,7 +172,7 @@ install_postfix() {
 }
 
 install_languages
-install_mysql57
+install_mysql
 WEBSERVER=$(echo "apache2 nginx" | tr " " "\n" | fzf)
 install_webserver
 install_phpmyadmin
