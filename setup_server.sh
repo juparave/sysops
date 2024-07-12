@@ -112,7 +112,7 @@ install_certbot() {
 
 install_phpmyadmin() {
     # Confirm before installing phpMyAdmin
-    read -p -n1 "Do you want to install phpMyAdmin? (y/n): " yn
+    read -p -n1 "Do you want to install phpMyAdmin? (y/n): " yn </dev/tty
     case $yn in
         [Yy]* ) do_install_phpmyadmin; break;;
         [Nn]* ) echo "${RED}Skipping phpMyAdmin installation${ENDCOLR}"; break;;
