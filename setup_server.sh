@@ -112,14 +112,12 @@ install_certbot() {
 
 install_phpmyadmin() {
     # Confirm before installing phpMyAdmin
-    while true; do
-        read -p "Do you want to install phpMyAdmin? (y/n): " yn
-        case $yn in
-            [Yy]* ) do_install_phpmyadmin; break;;
-            [Nn]* ) echo "${RED}Skipping phpMyAdmin installation${ENDCOLR}"; break;;
-            * ) echo "Please answer yes or no.";;
-        esac
-    done
+    read -p -n1 "Do you want to install phpMyAdmin? (y/n): " yn
+    case $yn in
+        [Yy]* ) do_install_phpmyadmin; break;;
+        [Nn]* ) echo "${RED}Skipping phpMyAdmin installation${ENDCOLR}"; break;;
+        * ) echo "Please answer yes or no, next time, skipping phpMyAdmin installation";;
+    esac
 }
 
 do_install_phpmyadmin() {
