@@ -174,9 +174,9 @@ install_mysql
 WEBSERVER=$(echo "apache2 nginx" | tr " " "\n" | fzf)
 install_webserver
 install_phpmyadmin
-read
+echo
 install_postfix
-read
+echo
 install_vimrc
 
 echo "${GREEN}All installations are done!${ENDCOLR}"
