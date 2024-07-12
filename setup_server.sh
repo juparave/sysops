@@ -86,7 +86,8 @@ install_webserver() {
 
 install_mysql() {
     echo "${BLUE}installing mysql database server${ENDCOLR}"
-    apt install -y mysql-server
+    # You need to specify the 8.0 version number
+    apt install -y mysql-server-8.0
 }
 
 install_php() {
