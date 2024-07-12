@@ -114,8 +114,8 @@ install_phpmyadmin() {
     # Confirm before installing phpMyAdmin
     read -n1 -p "Do you want to install phpMyAdmin? (y/n): " yn </dev/tty
     case $yn in
-        [Yy]* ) do_install_phpmyadmin; break;;
-        [Nn]* ) echo "${RED}Skipping phpMyAdmin installation${ENDCOLR}"; break;;
+        [Yy]* ) do_install_phpmyadmin;;
+        [Nn]* ) echo "${RED}Skipping phpMyAdmin installation${ENDCOLR}";;
         * ) echo "Please answer yes or no, next time, skipping phpMyAdmin installation";;
     esac
 }
