@@ -66,6 +66,12 @@ install_nginx() {
 install_apache2() {
     echo "${BLUE}installing apache2 webserver${ENDCOLR}"
     apt-get install -y apache2
+    echo "${BLUE}enabling basic a2modules${ENDCOLOR}"
+    a2enmod ssl
+    a2enmod proxy
+    a2enmod proxy_balancer
+    a2enmod proxy_http
+    echo "${BLUE}apche2 installation done${ENDCOLOR}"
 }
 
 install_webserver() {
